@@ -1,25 +1,28 @@
 package me.crupette.sheepconsistency;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
+import me.crupette.sheepconsistency.client.SheepShearedFeatureRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.SheepModel;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class SheepConsistency implements ClientModInitializer {
-
-    public static Logger LOGGER = LogManager.getLogger();
+@Mod(SheepConsistency.MOD_ID)
+public class SheepConsistency {
 
     public static final String MOD_ID = "sheepconsistency";
-    public static final String MOD_NAME = "Sheep Consistency";
 
-    public static void log(Level level, String message){
-        LOGGER.log(level, "["+MOD_NAME+"] " + message);
+    public SheepConsistency() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::client);
     }
 
-    @Override
-    public void onInitializeClient() {
-
+    private void client(FMLClientSetupEvent e) {
+        EntityRendererManager entityRendererManager = Minecraft.getInstance().getRenderManager();
+        MobRenderer<SheepEntity, SheepModel<SheepEntity>> renderer = (MobRenderer<SheepEntity, SheepModel<SheepEntity>>) entityRendererManager.renderers.get(EntityType.SHEEP);
+        renderer.addLayer(new SheepShearedFeatureRenderer(renderer));
     }
 }
