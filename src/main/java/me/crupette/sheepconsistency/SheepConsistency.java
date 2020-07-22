@@ -1,6 +1,5 @@
 package me.crupette.sheepconsistency;
 
-import me.crupette.sheepconsistency.client.SheepShearedFeatureRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

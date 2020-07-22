@@ -1,4 +1,4 @@
-package me.crupette.sheepconsistency.client;
+package me.crupette.sheepconsistency;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import me.crupette.sheepconsistency.SheepConsistency;
@@ -29,7 +29,7 @@ public class SheepShearedFeatureRenderer extends LayerRenderer<SheepEntity, Shee
             int o = DyeColor.values().length;
             int p = n % o;
             int q = (n + 1) % o;
-            float r = ((float) (sheepEntity.ticksExisted % 25) + h) / 25.0F;
+            float r = (sheepEntity.ticksExisted % 25 + h) / 25.0F;
             float[] fs = SheepEntity.getDyeRgb(DyeColor.byId(p));
             float[] gs = SheepEntity.getDyeRgb(DyeColor.byId(q));
             v = fs[0] * (1.0F - r) + gs[0] * r;
